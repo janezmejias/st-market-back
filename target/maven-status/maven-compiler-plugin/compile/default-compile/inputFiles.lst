@@ -1,0 +1,9 @@
+/home/janez/Documents/CONCEPTs/st-market-back/src/main/java/com/st/market/stmarket/user/model/User.java
+/home/janez/Documents/CONCEPTs/st-market-back/src/main/java/com/st/market/stmarket/api/Constants.java
+/home/janez/Documents/CONCEPTs/st-market-back/src/main/java/com/st/market/stmarket/product/model/Product.java
+/home/janez/Documents/CONCEPTs/st-market-back/src/main/java/com/st/market/stmarket/product/controller/ProductController.java
+/home/janez/Documents/CONCEPTs/st-market-back/src/main/java/com/st/market/stmarket/user/controller/UserController.java
+/home/janez/Documents/CONCEPTs/st-market-back/src/main/java/com/st/market/stmarket/user/repository/UserRepository.java
+/home/janez/Documents/CONCEPTs/st-market-back/src/main/java/com/st/market/stmarket/api/ControllerBase.java
+/home/janez/Documents/CONCEPTs/st-market-back/src/main/java/com/st/market/stmarket/product/repository/ProductRepository.java
+/home/janez/Documents/CONCEPTs/st-market-back/src/main/java/com/st/market/stmarket/StMarketApplication.java

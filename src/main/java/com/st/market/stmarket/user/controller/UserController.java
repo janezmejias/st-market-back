@@ -1,0 +1,26 @@
+package com.st.market.stmarket.user.controller;
+
+import com.st.market.stmarket.api.Constants;
+import com.st.market.stmarket.api.ControllerBase;
+import com.st.market.stmarket.user.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.st.market.stmarket.user.repository.UserRepository;
+import org.springframework.context.annotation.Lazy;
+
+/**
+ *
+ * @author janez
+ */
+@RestController
+@RequestMapping(Constants.URI_USER)
+@Lazy
+public class UserController extends ControllerBase<User, String> {
+
+    @Autowired
+    public UserController(UserRepository repository) {
+        super(repository);
+    }
+
+}
