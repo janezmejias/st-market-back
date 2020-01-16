@@ -1,0 +1,62 @@
+<template>
+<q-page class="q-pa-md">
+    <q-breadcrumbs>
+        <q-breadcrumbs-el to="/" label="Home" icon="home" />
+        <q-breadcrumbs-el label="Add Product" icon="redeem" />
+    </q-breadcrumbs>
+
+    <div class="row">
+        <div class="col-10">
+            <div class="q-pa-md">
+                <div class="q-gutter-md">
+                    <q-input filled v-model="model.name" label="Name" />
+                </div>
+            </div>
+
+            <div class="q-pa-md">
+                <div class="q-gutter-md">
+                    <q-input filled v-model="model.image" label="URL Image" />
+                </div>
+            </div>
+
+            <div class="q-pa-md">
+                <div class="q-gutter-md">
+                    <q-input filled v-model="model.oldPrice" label="Normal Price" />
+                </div>
+            </div>
+
+            <div class="q-pa-md">
+                <div class="q-gutter-md">
+                    <q-input filled v-model="model.newPrice" label="Off Price" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <q-separator inset />
+
+    <div class="q-pa-md q-gutter-sm">
+        <q-btn @click="add" color="white" text-color="black" label="Save" />
+        <q-btn color="deep-orange" label="Cancel" />
+    </div>
+
+</q-page>
+</template>
+
+<script>
+export default {    
+    data() {
+        return {            
+            model: {}
+        }
+    },
+    methods: {
+        add() {
+            this.$axios.post('/product/add', this.model)
+                .then((response) => {                    
+                    this.$router.push('/items')
+                });
+        }
+    }
+}
+</script>
