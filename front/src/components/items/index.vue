@@ -4,19 +4,10 @@
         <q-breadcrumbs-el to="/" label="Home" icon="home" />
         <q-breadcrumbs-el label="Items" icon="redeem" />
     </q-breadcrumbs>
-
-    <div class="float-right">
-        <q-btn round to="/item/add" color="primary" icon="add">
-            <q-tooltip transition-show="flip-right" transition-hide="flip-left" anchor="center left" self="center right">
-                Add Product
-            </q-tooltip>
-        </q-btn>
-
-    </div>
-
     <div class="q-pa-md">
 
-        <q-table :grid="$q.screen.xs" title="Treats" :data="list" :columns="columns" row-key="name" :filter="filter" hide-header>
+        <q-table title="Treats" :data="list" :columns="columns" row-key="name" :filter="filter">
+
             <template v-slot:top-right>
                 <q-input borderless dense debounce="300" v-model="filter" placeholder="Search">
                     <template v-slot:append>
@@ -24,7 +15,35 @@
                     </template>
                 </q-input>
             </template>
+
+            <template v-slot:body="props">
+                <q-tr :props="props">
+                    <q-td key="name" :props="props">
+                        {{ props.row.name }}
+                    </q-td>
+                    <q-td key="image" :props="props">
+                        {{ props.row.image }}
+                    </q-td>
+                    <q-td key="oldPrice" :props="props">
+                        {{ props.row.oldPrice }}
+                    </q-td>
+                    <q-td key="newPrice" :props="props">
+                        {{ props.row.newPrice }}
+                    </q-td>
+                    <q-td>
+                        <q-btn round @click="delete(props.row.id)" color="pink" icon="delete" />
+                    </q-td>
+                </q-tr>
+            </template>
         </q-table>
+
+        <div class="absolute-bottom-right q-pa-md">
+            <q-btn round to="/item/add" color="primary" icon="add">
+                <q-tooltip transition-show="flip-right" transition-hide="flip-left" anchor="center left" self="center right">
+                    Add Product
+                </q-tooltip>
+            </q-btn>
+        </div>
     </div>
 </q-page>
 </template>
@@ -71,24 +90,19 @@ export default {
     },
     mounted() {
         this.index()
-        //this.$q.loadingBar.start()
-        /*
-        Loading.show({
-            spinner: QSpinnerGears,
-            message: 'Some important <b>process</b> is in progress.<br/><span>Hang on...</span>'
-        })
-
-        setTimeout(() => {
-            Loading.hide()
-        }, 1000)
-        */
     },
     methods: {
         index() {
             this.$axios.get('/product/listAll')
                 .then((response) => {
                     this.list = response.data
-                    this.$q.loadingBar.stop()
+                });
+        },
+        delete(id) {      
+            console.log(id)
+            this.$axios.delete('/product/delete?id=' + id)
+                .then((response) => {
+                    this.list = response.data
                 });
         }
     }
