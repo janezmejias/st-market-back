@@ -13,12 +13,15 @@ const routes = [
     component: () => import('components/items/add.vue')
   },
   {
+    path: '/item/edit/:id',
+    component: () => import('components/items/edit.vue')
+  },
+  {
     path: '/users',
     component: () => import('components/users/index.vue')
   }
 ]
 
-// Always leave this as last one
 if (process.env.MODE !== 'ssr') {
   routes.push({
     path: '*',

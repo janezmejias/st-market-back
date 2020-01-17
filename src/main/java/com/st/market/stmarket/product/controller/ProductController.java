@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(Constants.URI_PRODUCT)
 @Lazy
 @CrossOrigin
-public class ProductController extends ControllerBase<Product, String> {
+public class ProductController extends ControllerBase<Product, Long> {
 
     @Autowired
     public ProductController(ProductRepository repository) {

@@ -36,7 +36,7 @@ public class ProductTest {
 
     @Test
     public void proceed() throws Exception {
-        for (int index = 1; index < 11; index++) {
+        for (int index = 1; index < 10; index++) {
             Product model = new Product();
             model.setName("product _ " + index);
             model.setImage("assets/img/product/c-product-" + index + ".jpg");

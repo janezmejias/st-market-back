@@ -25,13 +25,14 @@
                         {{ props.row.image }}
                     </q-td>
                     <q-td key="oldPrice" :props="props">
-                        {{ props.row.oldPrice }}
+                        {{ roundValue(props.row.oldPrice) }}
                     </q-td>
-                    <q-td key="newPrice" :props="props">
-                        {{ props.row.newPrice }}
+                    <q-td key="newPrice" :props="props">                        
+                        {{ roundValue(props.row.newPrice) }}
                     </q-td>
-                    <q-td>
-                        <q-btn round @click="delete(props.row.id)" color="pink" icon="delete" />
+                    <q-td key="id">
+                        <q-btn style="margin-right: 5px" round @click="edit(props.row.id)" color="orange" icon="edit" />
+                        <q-btn round @click="confirmRemove(props.row)" color="pink" icon="delete" />
                     </q-td>
                 </q-tr>
             </template>
@@ -45,6 +46,21 @@
             </q-btn>
         </div>
     </div>
+
+    <q-dialog v-model="confirm" persistent>
+        <q-card>
+            <q-card-section class="row items-center">
+                <q-avatar icon="help" text-color="dark" />
+                <span class="q-ml-sm">¿Realmente desea eliminar este elemento?</span>
+            </q-card-section>
+
+            <q-card-actions align="right">
+                <q-btn flat label="CancelAR" color="gray" v-close-popup />
+                <!--<q-btn flat label="eliminar" color="red" v-close-popup />-->
+                <q-btn @click="remove" color="red" text-color="white" label="Standard" />
+            </q-card-actions>
+        </q-card>
+    </q-dialog>
 </q-page>
 </template>
 
@@ -53,8 +69,10 @@ export default {
     // name: 'ComponentName',
     data() {
         return {
+            confirm: false,
             filter: '',
             list: [],
+            model: {},
             columns: [{
                     name: 'name',
                     required: true,
@@ -89,21 +107,36 @@ export default {
         }
     },
     mounted() {
-        this.index()
+        this.listAll()
     },
     methods: {
-        index() {
+        listAll() {
             this.$axios.get('/product/listAll')
                 .then((response) => {
                     this.list = response.data
                 });
         },
-        delete(id) {      
-            console.log(id)
-            this.$axios.delete('/product/delete?id=' + id)
+        edit(id) {
+            this.$router.push({
+                path: '/item/edit/' + id,
+                params: {
+                    id: id
+                }
+            })
+        },
+        confirmRemove(content) {
+            this.model = content
+            this.confirm = true
+        },
+        remove() {
+            this.$axios.delete('/product/delete?id=' + this.model.id)
                 .then((response) => {
-                    this.list = response.data
+                    this.listAll()
+                    this.confirm = false
                 });
+        },
+        roundValue(value) {
+             return '$' + value.toFixed(2); 
         }
     }
 }

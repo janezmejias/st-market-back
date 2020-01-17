@@ -37,26 +37,29 @@
 
     <div class="q-pa-md q-gutter-sm">
         <q-btn @click="add" color="white" text-color="black" label="Save" />
-        <q-btn color="deep-orange" label="Cancel" />
+        <q-btn @click="back" color="deep-orange" label="Cancel" />
     </div>
 
 </q-page>
 </template>
 
 <script>
-export default {    
+export default {
     data() {
-        return {            
+        return {
             model: {}
         }
     },
     methods: {
         add() {
             this.$axios.post('/product/add', this.model)
-                .then((response) => {                    
-                    this.$router.push('/items')
+                .then((response) => {
+                    this.back()
                 });
-        }
+        },
+        back() {
+            this.$router.push('/items')
+        },
     }
 }
 </script>
