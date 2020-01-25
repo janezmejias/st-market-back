@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Loading, QSpinnerGears } from 'quasar'
 
 Vue.prototype.$axios = axios
-axios.defaults.baseURL = 'http://localhost:8080/api/v1'
+axios.defaults.baseURL = 'http://192.168.0.15:8080/api/v1'
 axios.interceptors.request.use(function (config) {
 
     Loading.show({

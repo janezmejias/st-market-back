@@ -6,10 +6,16 @@
     </q-breadcrumbs>
 
     <div class="row">
-        <div class="col-10">
+        <div class="col-12">
             <div class="q-pa-md">
                 <div class="q-gutter-md">
                     <q-input filled v-model="model.name" label="Name" />
+                </div>
+            </div>
+
+            <div class="q-pa-md">
+                <div class="q-gutter-md">
+                    <q-input filled v-model="model.title" label="Title" />
                 </div>
             </div>
 
@@ -28,6 +34,24 @@
             <div class="q-pa-md">
                 <div class="q-gutter-md">
                     <q-input filled v-model="model.newPrice" label="Off Price" />
+                </div>
+            </div>
+
+            <div class="q-pa-md">
+                <div class="q-gutter-md">
+                    <q-input filled v-model="model.discount" label="Discount" />
+                </div>
+            </div>
+
+            <div class="q-pa-md">
+                <div class="q-gutter-md">
+                    <q-input filled v-model="model.available" label="Available" />
+                </div>
+            </div>
+
+            <div class="q-pa-md">
+                <div class="q-gutter-md">
+                    <q-input filled v-model="model.description" label="Description" />
                 </div>
             </div>
         </div>

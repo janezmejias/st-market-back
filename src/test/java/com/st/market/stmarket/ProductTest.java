@@ -33,15 +33,27 @@ public class ProductTest {
     
     @Autowired
     ProductRepository repository;
+    /*
+    @Column(name = "discount")
+    private Integer discount;
+    @Column(name = "available")
+    private Long available;
+    @Column(name = "description")
+    private String description;
+     */
 
     @Test
     public void proceed() throws Exception {
         for (int index = 1; index < 10; index++) {
             Product model = new Product();
+            model.setTitle("title product " + index);
             model.setName("product _ " + index);
             model.setImage("assets/img/product/c-product-" + index + ".jpg");
-            model.setNewPrice(new BigDecimal(index));
             model.setOldPrice(new BigDecimal(index * 2));
+            model.setNewPrice(new BigDecimal(index));
+            model.setDiscount(30);
+            model.setAvailable(index + 0L);
+            model.setDescription("vida sempiterna; Dios es, según el pensamiento de la época, fuente originaria y sempiterna de justicia");
 
             Gson gson = new Gson();
             String o = gson.toJson(model);

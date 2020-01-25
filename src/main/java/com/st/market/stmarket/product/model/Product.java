@@ -19,6 +19,8 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "title")
+    private String title;
     @Column(name = "name")
     private String name;
     @Column(name = "image")
@@ -27,6 +29,12 @@ public class Product {
     private BigDecimal oldPrice;
     @Column(name = "new_price")
     private BigDecimal newPrice;
+    @Column(name = "discount")
+    private Integer discount;
+    @Column(name = "available")
+    private Long available;
+    @Column(name = "description")
+    private String description;
 
     public Long getId() {
         return id;
@@ -34,6 +42,14 @@ public class Product {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getName() {
@@ -68,4 +84,27 @@ public class Product {
         this.newPrice = newPrice;
     }
 
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
+    }
+
+    public Long getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Long available) {
+        this.available = available;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
