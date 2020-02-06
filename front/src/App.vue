@@ -8,9 +8,7 @@
 
                     <q-toolbar-title>
                         Market Management
-                    </q-toolbar-title>
-
-                    <div>Quasar v{{ $q.version }}</div>
+                    </q-toolbar-title>                
                 </q-toolbar>
             </q-header>
 
