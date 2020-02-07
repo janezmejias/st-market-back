@@ -1,7 +1,5 @@
 package com.st.market.stmarket.api;
 
-import java.io.Serializable;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,23 +12,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
- * @author janezZ
+ * @author janez
  * @param <T>
- * @param <String>
  */
-public abstract class ControllerBase<T, String extends Serializable> {
+public abstract class ControllerBase<T> {
 
-    private final CrudRepository<T, String> repository;
+    private final ServiceBase<T> service;
 
-    public ControllerBase(CrudRepository<T, String> repository) {
-        this.repository = repository;
+    public ControllerBase(ServiceBase<T> service) {
+        this.service = service;
     }
 
     @GetMapping(Constants.HTTP_GET_ALL)
     @ResponseBody
     ResponseEntity<?> listAll() {
         try {
-            return new ResponseEntity(repository.findAll(), HttpStatus.OK);
+            return new ResponseEntity(service.findAll(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -38,9 +35,9 @@ public abstract class ControllerBase<T, String extends Serializable> {
 
     @GetMapping(Constants.HTTP_GET_ONE)
     @ResponseBody
-    ResponseEntity<?> getById(@RequestParam("id") String id) {
+    ResponseEntity<?> getById(@RequestParam("id") Long id) {
         try {
-            return new ResponseEntity(repository.findById(id), HttpStatus.OK);
+            return new ResponseEntity(service.findById(id), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -50,7 +47,7 @@ public abstract class ControllerBase<T, String extends Serializable> {
     @ResponseBody
     ResponseEntity<?> create(@RequestBody T model) {
         try {
-            return new ResponseEntity(repository.save(model), HttpStatus.OK);
+            return new ResponseEntity(service.save(model), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -60,7 +57,7 @@ public abstract class ControllerBase<T, String extends Serializable> {
     @ResponseBody
     ResponseEntity<?> update(@RequestBody T model) {
         try {
-            return new ResponseEntity(repository.save(model), HttpStatus.OK);
+            return new ResponseEntity(service.save(model), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -68,9 +65,9 @@ public abstract class ControllerBase<T, String extends Serializable> {
 
     @DeleteMapping(Constants.HTTP_DELETE)
     @ResponseBody
-    ResponseEntity<?> delete(@RequestParam("id") String id) {
+    ResponseEntity<?> delete(@RequestParam("id") Long id) {
         try {
-            repository.deleteById(id);
+            service.deleteById(id);
             return new ResponseEntity(1, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(e, HttpStatus.INTERNAL_SERVER_ERROR);

@@ -19,7 +19,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long id;            
 
     @Column(name = "name")
     private String name;
@@ -40,6 +40,7 @@ public class User {
     @Column(name = "creation_date")
     private Timestamp creationDate;
 
+    @CreationTimestamp
     @Column(name = "last_sign")
     private Timestamp lastSign;
 

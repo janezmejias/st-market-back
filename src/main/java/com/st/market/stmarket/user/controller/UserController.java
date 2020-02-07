@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.st.market.stmarket.user.repository.UserRepository;
+import com.st.market.stmarket.user.service.UserService;
 import org.springframework.context.annotation.Lazy;
 
 /**
@@ -18,11 +18,11 @@ import org.springframework.context.annotation.Lazy;
 @RequestMapping(Constants.URI_USER)
 @Lazy
 @CrossOrigin
-public class UserController extends ControllerBase<User, String> {
+public class UserController extends ControllerBase<User> {
 
     @Autowired
-    public UserController(UserRepository repository) {
-        super(repository);
+    public UserController(UserService service) {
+        super(service);
     }
 
 }
