@@ -1,12 +1,9 @@
 package com.st.market.stmarket.product.model;
 
+import com.st.market.stmarket.order.model.Order;
+
 import java.math.BigDecimal;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  *
@@ -33,8 +30,16 @@ public class Product {
     private Integer discount;
     @Column(name = "available")
     private Long available;
+
     @Column(name = "description")
     private String description;
+
+    /*
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id", nullable = false, insertable=false, updatable=false)
+    private Order order;
+     */
+
 
     public Long getId() {
         return id;
