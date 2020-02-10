@@ -2,8 +2,11 @@ package com.st.market.stmarket.product.service;
 
 import com.st.market.stmarket.product.model.Product;
 import com.st.market.stmarket.product.repository.ProductRepository;
+
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,19 +14,20 @@ import org.springframework.stereotype.Service;
  * @author janez
  */
 @Service
+@Lazy
 public class ProductServiceHandler implements ProductService {
 
     @Autowired
     ProductRepository repository;
 
     @Override
-    public <S extends Product> S save(S s) {
-        return repository.save(s);
+    public Product save(Product model) {
+        return repository.save(model);
     }
 
     @Override
-    public <S extends Product> Iterable<S> saveAll(Iterable<S> itrbl) {
-        return repository.saveAll(itrbl);
+    public List<Product> firstTopProduct() {
+        return repository.firstTopProduct();
     }
 
     @Override
@@ -42,11 +46,6 @@ public class ProductServiceHandler implements ProductService {
     }
 
     @Override
-    public Iterable<Product> findAllById(Iterable<Long> itrbl) {
-        return repository.findAllById(itrbl);
-    }
-
-    @Override
     public long count() {
         return repository.count();
     }
@@ -59,11 +58,6 @@ public class ProductServiceHandler implements ProductService {
     @Override
     public void delete(Product t) {
         repository.delete(t);
-    }
-
-    @Override
-    public void deleteAll(Iterable<? extends Product> itrbl) {
-        repository.deleteAll();
     }
 
     @Override

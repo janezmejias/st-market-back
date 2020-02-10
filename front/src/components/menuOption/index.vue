@@ -22,13 +22,9 @@
       </template>
 
       <template v-slot:body="props">
-        <q-tr :props="props">           
-          <q-td key="image" :props="props">
-            <q-avatar>
-              <img src="props.row.image">
-            </q-avatar>
-          </q-td>          
+        <q-tr :props="props">                             
           <q-td key="name" :props="props">{{ props.row.name }}</q-td>          
+          <q-td key="path" :props="props">{{ props.row.path }}</q-td>          
           <q-td key="id">
             <q-btn @click="edit(props.row.id)" outline round color="primary" icon="edit" style="margin-right: 5px !important"/>
             <q-btn @click="confirmRemove(props.row)" outline round color="primary" icon="delete" />
@@ -38,7 +34,7 @@
     </q-table>
 
     <div class="absolute-bottom-right q-pa-md">
-      <q-btn round to="/item/add" color="primary" icon="add">
+      <q-btn round to="/options/add" color="primary" icon="add">
         <q-tooltip
           transition-show="flip-right"
           transition-hide="flip-left"
@@ -85,25 +81,11 @@ export default {
           sortable: true
         },
         {
-          name: "image",
-          align: "center",
-          label: "URL Image",
-          field: "image",
+          name: "path",
+          align: "left",
+          label: "URI",
+          field: "path",
           sortable: true
-        },
-        {
-          name: "oldPrice",
-          label: "Normal Price",
-          field: "oldPrice",
-          sortable: true,
-          sort: (a, b) => parseInt(a, 10) - parseInt(b, 10)
-        },
-        {
-          name: "newPrice",
-          label: "Off Price",
-          field: "newPrice",
-          sortable: true,
-          sort: (a, b) => parseInt(a, 10) - parseInt(b, 10)
         }
       ]
     };
@@ -113,13 +95,13 @@ export default {
   },
   methods: {
     listAll() {
-      this.$axios.get("/user/listAll").then(response => {
+      this.$axios.get("/options/listAll").then(response => {
         this.list = response.data;
       });
     },
     edit(id) {
       this.$router.push({
-        path: "/user/edit/" + id,
+        path: "/options/edit/" + id,
         params: {
           id: id
         }
@@ -131,7 +113,7 @@ export default {
     },
     remove() {
       this.$axios
-        .delete("/user/delete?id=" + this.model.id)
+        .delete("/options/delete?id=" + this.model.id)
         .then(response => {
           this.listAll();
           this.confirm = false;

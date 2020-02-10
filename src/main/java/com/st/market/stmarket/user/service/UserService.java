@@ -9,6 +9,4 @@ import com.st.market.stmarket.user.model.User;
  */
 public interface UserService extends ServiceBase<User> {
 
-    User findByEmail(String email);
-
 }

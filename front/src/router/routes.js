@@ -19,6 +19,18 @@ const routes = [
   {
     path: '/users',
     component: () => import('components/users/index.vue')
+  },
+  {
+    path: '/options',
+    component: () => import('components/menuOption/index.vue')
+  },
+  {
+    path: '/options/add',
+    component: () => import('components/menuOption/add.vue')
+  },
+  {
+    path: '/options/edit/:id',
+    component: () => import('components/menuOption/edit.vue')
   }
 ]
 

@@ -17,7 +17,7 @@ import iconSet from 'quasar/icon-set/material-icons'
 
 import Vue from 'vue'
 
-import {Quasar,QBtn,QTable,QTh,QTr,QTd,QLayout,QPageContainer,QPage,QHeader,QFooter,QDrawer,QPageSticky,QPageScroller,QSeparator,QBreadcrumbs,QBreadcrumbsEl,QTooltip,LoadingBar} from 'quasar'
+import {Quasar,QBtn,QTable,QTh,QTr,QTd,QLayout,QPageContainer,QPage,QHeader,QFooter,QDrawer,QPageSticky,QPageScroller,QSeparator,QBreadcrumbs,QBreadcrumbsEl,QTooltip,QAvatar,QToggle,LoadingBar} from 'quasar'
 
 
-Vue.use(Quasar, { config: {},lang: lang,iconSet: iconSet,components: {QBtn,QTable,QTh,QTr,QTd,QLayout,QPageContainer,QPage,QHeader,QFooter,QDrawer,QPageSticky,QPageScroller,QSeparator,QBreadcrumbs,QBreadcrumbsEl,QTooltip},plugins: {LoadingBar} })
+Vue.use(Quasar, { config: {},lang: lang,iconSet: iconSet,components: {QBtn,QTable,QTh,QTr,QTd,QLayout,QPageContainer,QPage,QHeader,QFooter,QDrawer,QPageSticky,QPageScroller,QSeparator,QBreadcrumbs,QBreadcrumbsEl,QTooltip,QAvatar,QToggle},plugins: {LoadingBar} })

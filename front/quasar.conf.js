@@ -60,7 +60,9 @@ module.exports = function (ctx) {
         'QSeparator',
         'QBreadcrumbs',
         'QBreadcrumbsEl',
-        'QTooltip'
+        'QTooltip',
+        'QAvatar',
+        'QToggle'
       ],
       directives: [],
 

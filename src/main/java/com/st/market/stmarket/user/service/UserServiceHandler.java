@@ -5,6 +5,7 @@ import com.st.market.stmarket.user.repository.UserRepository;
 import java.sql.Timestamp;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,30 +13,21 @@ import org.springframework.stereotype.Service;
  * @author janez
  */
 @Service
+@Lazy
 public class UserServiceHandler implements UserService {
 
     @Autowired
     UserRepository repository;
 
     @Override
-    public User findByEmail(String email) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public <S extends User> S save(S s) {
+    public User save(User s) {
         User usr = repository.findByEmail(s.getEmail());
         if (usr == null) {
             usr = repository.save(s);
-            return (S) usr;
+            return usr;
         }
         usr.setLastSign(new Timestamp(System.currentTimeMillis()));
-        return repository.save(s);
-    }
-
-    @Override
-    public <S extends User> Iterable<S> saveAll(Iterable<S> itrbl) {
-        return repository.saveAll(itrbl);
+        return usr;
     }
 
     @Override
@@ -54,11 +46,6 @@ public class UserServiceHandler implements UserService {
     }
 
     @Override
-    public Iterable<User> findAllById(Iterable<Long> itrbl) {
-        return repository.findAllById(itrbl);
-    }
-
-    @Override
     public long count() {
         return repository.count();
     }
@@ -71,11 +58,6 @@ public class UserServiceHandler implements UserService {
     @Override
     public void delete(User t) {
         repository.delete(t);
-    }
-
-    @Override
-    public void deleteAll(Iterable<? extends User> itrbl) {
-        repository.deleteAll(itrbl);;
     }
 
     @Override
