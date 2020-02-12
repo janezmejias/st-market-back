@@ -1,5 +1,7 @@
 package com.st.market.stmarket.user.service;
 
+import com.st.market.stmarket.cart.model.Cart;
+import com.st.market.stmarket.cart.repository.CartRepository;
 import com.st.market.stmarket.user.model.User;
 import com.st.market.stmarket.user.repository.UserRepository;
 import java.sql.Timestamp;
@@ -19,11 +21,18 @@ public class UserServiceHandler implements UserService {
     @Autowired
     UserRepository repository;
 
+    @Autowired
+    CartRepository cartRepository;
+
     @Override
     public User save(User s) {
         User usr = repository.findByEmail(s.getEmail());
         if (usr == null) {
             usr = repository.save(s);
+            Cart cart = new Cart();
+            cart.setUserId(usr.getId());
+
+            cartRepository.save(cart);
             return usr;
         }
         usr.setLastSign(new Timestamp(System.currentTimeMillis()));

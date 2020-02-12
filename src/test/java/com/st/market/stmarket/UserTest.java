@@ -29,7 +29,7 @@ public class UserTest {
     @Autowired
     MockMvc mockMvc;
 
-    @Test
+    //@Test
     public void proceed() throws Exception {
         for (int index = 1; index < 11; index++) {
             User model = new User();            
@@ -50,7 +50,7 @@ public class UserTest {
 
     private RequestBuilder post(String o) {
         return MockMvcRequestBuilders
-                .post("/api/v1/user", o)
+                .post("/api/v1/user/create", o)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(o);
     }

@@ -33,14 +33,6 @@ public class ProductTest {
     
     @Autowired
     ProductRepository repository;
-    /*
-    @Column(name = "discount")
-    private Integer discount;
-    @Column(name = "available")
-    private Long available;
-    @Column(name = "description")
-    private String description;
-     */
 
     @Test
     public void proceed() throws Exception {
@@ -73,7 +65,7 @@ public class ProductTest {
 
     private RequestBuilder post(String o) {
         return MockMvcRequestBuilders
-                .post("/api/v1/product/add", o)
+                .post("/api/v1/product/create", o)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(o);
     }

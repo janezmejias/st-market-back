@@ -1,7 +1,6 @@
 package com.st.market.stmarket.order.model;
 
-import com.st.market.stmarket.product.model.Product;
-
+import com.st.market.stmarket.product.model.ProductOrder;
 import javax.persistence.*;
 import java.util.Set;
 
@@ -20,11 +19,8 @@ public class Order {
     @Column(name = "user_id")
     private Long userId;
 
-    /*
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private Set<Product> products;
-     */
+    @OneToMany(mappedBy = "order")
+    private Set<ProductOrder> products;
 
     public Long getId() {
         return id;
@@ -42,4 +38,11 @@ public class Order {
         this.userId = userId;
     }
 
+    public Set<ProductOrder> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<ProductOrder> products) {
+        this.products = products;
+    }
 }

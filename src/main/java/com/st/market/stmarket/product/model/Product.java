@@ -30,16 +30,8 @@ public class Product {
     private Integer discount;
     @Column(name = "available")
     private Long available;
-
     @Column(name = "description")
     private String description;
-
-    /*
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id", nullable = false, insertable=false, updatable=false)
-    private Order order;
-     */
-
 
     public Long getId() {
         return id;
