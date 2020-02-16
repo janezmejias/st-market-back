@@ -27,4 +27,7 @@ public class Constants {
     public static final String HTTP_REMOVE_ITEM_CART = "/remove-item";
 
     public static final String TOP_PRODUCTS = "/top-products";
+
+    public static final String FIND_BY_USER_ID = "/findByUserId";
+    public static final String FIND_PRODUCTS_BY_ORDER_ID = "/findProductsByOrderId";
 }

@@ -6,15 +6,11 @@ import com.st.market.stmarket.product.model.ProductOrder;
 
 import java.util.List;
 
-/**
- *
- * @author janez
- */
 public interface ProductService extends ServiceBase<Product> {
 
     List<Product> firstTopProduct();
 
     ProductOrder addProductOrder(ProductOrder model);
 
-    List<ProductOrder> findProductsByOrderId(Long orderId);
+    List<ProductOrder> findByOrderId(Long orderId);
 }

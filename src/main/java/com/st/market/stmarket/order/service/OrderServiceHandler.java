@@ -32,6 +32,11 @@ public class OrderServiceHandler implements OrderService {
     @Autowired
     CartRepository cartRepository;
 
+    @Override
+    public List<Order> findByUserId(Long userId) {
+        return repository.findByUserId(userId);
+    }
+
     @Transactional
     @Override
     public Order save(Order model) throws Exception {

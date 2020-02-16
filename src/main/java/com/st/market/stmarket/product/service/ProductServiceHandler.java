@@ -26,8 +26,8 @@ public class ProductServiceHandler implements ProductService {
     ProductOrderRepository productOrderRepository;
 
     @Override
-    public List<ProductOrder> findProductsByOrderId(Long orderId) {
-        return productOrderRepository.findProductOrderBy(orderId);
+    public List<ProductOrder> findByOrderId(Long orderId) {
+        return productOrderRepository.findByOrderId(orderId);
     }
 
     @Override

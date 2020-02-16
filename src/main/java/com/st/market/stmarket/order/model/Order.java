@@ -1,7 +1,11 @@
 package com.st.market.stmarket.order.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.st.market.stmarket.product.model.ProductOrder;
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Set;
 
 /**
@@ -19,7 +23,12 @@ public class Order {
     @Column(name = "user_id")
     private Long userId;
 
-    @OneToMany(mappedBy = "order")
+    @CreationTimestamp
+    @Column(name = "creation_date")
+    private Timestamp creationDate;
+
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<ProductOrder> products;
 
     public Long getId() {
@@ -36,6 +45,14 @@ public class Order {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Timestamp getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Timestamp creationDate) {
+        this.creationDate = creationDate;
     }
 
     public Set<ProductOrder> getProducts() {
