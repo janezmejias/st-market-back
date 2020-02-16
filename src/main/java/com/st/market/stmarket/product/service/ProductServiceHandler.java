@@ -1,7 +1,8 @@
 package com.st.market.stmarket.product.service;
 
-import com.st.market.stmarket.order.model.Order;
 import com.st.market.stmarket.product.model.Product;
+import com.st.market.stmarket.product.model.ProductOrder;
+import com.st.market.stmarket.product.repository.ProductOrderRepository;
 import com.st.market.stmarket.product.repository.ProductRepository;
 
 import java.util.*;
@@ -20,6 +21,19 @@ public class ProductServiceHandler implements ProductService {
 
     @Autowired
     ProductRepository repository;
+
+    @Autowired
+    ProductOrderRepository productOrderRepository;
+
+    @Override
+    public List<ProductOrder> findProductsByOrderId(Long orderId) {
+        return productOrderRepository.findProductOrderBy(orderId);
+    }
+
+    @Override
+    public ProductOrder addProductOrder(ProductOrder model) {
+        return productOrderRepository.save(model);
+    }
 
     @Override
     public Product save(Product model) {

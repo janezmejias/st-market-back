@@ -20,4 +20,6 @@ public interface ProductCartRepository extends JpaRepository<ProductCart, Long> 
             @Param("cart_id") Long cartId,
             @Param("product_id") Long productId);
 
+    long deleteByCartId(Long cartId);
+
 }

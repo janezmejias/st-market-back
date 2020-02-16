@@ -9,7 +9,7 @@ import java.util.Optional;
  */
 public interface ServiceBase<T> {
 
-    T save(T model);
+    T save(T model) throws Exception;
 
     Optional<T> findById(Long id);
 
