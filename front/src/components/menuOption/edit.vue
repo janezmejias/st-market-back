@@ -30,6 +30,12 @@
             <q-toggle v-model="model.available" label="Is Available?" />
           </div>
         </div>
+
+        <div class="q-pa-md">
+          <div class="q-gutter-md">
+            <q-toggle v-model="model.needToAuth" label="Need to Authenticate?" />
+          </div>
+        </div>
       </div>
     </div>
 

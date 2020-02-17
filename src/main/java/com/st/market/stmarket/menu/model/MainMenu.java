@@ -19,6 +19,9 @@ public class MainMenu {
     @Column(name = "image")
     private String image;
 
+    @Column(name = "need_to_auth")
+    private Boolean needToAuth;
+
     @Column(name = "available")
     private Boolean available;
 
@@ -52,6 +55,14 @@ public class MainMenu {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Boolean getNeedToAuth() {
+        return needToAuth;
+    }
+
+    public void setNeedToAuth(Boolean needToAuth) {
+        this.needToAuth = needToAuth;
     }
 
     public Boolean getAvailable() {
