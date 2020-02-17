@@ -24,6 +24,7 @@ public class UserServiceHandler implements UserService {
     @Autowired
     CartRepository cartRepository;
 
+    @Deprecated
     @Override
     public User save(User s) {
         User usr = repository.findByEmail(s.getEmail());
