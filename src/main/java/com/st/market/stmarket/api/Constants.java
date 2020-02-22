@@ -14,6 +14,7 @@ public class Constants {
     public static final String URI_CART = API_VERSION + "/cart";
     public static final String URI_OPTIONS = API_VERSION + "/options";
     public static final String URI_ORDER = API_VERSION + "/order";
+    public static final String URI_ADDRESS = API_VERSION + "/address";
     
     public static final String HTTP_GET_ALL = "/listAll";
     public static final String HTTP_FILTER_BY = "/filterBy";
