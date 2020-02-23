@@ -1,6 +1,9 @@
 package com.st.market.stmarket.address.model;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 /**
  *
@@ -13,6 +16,8 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
     @Column(name = "country")
     private String country;
     @Column(name = "state")
@@ -27,6 +32,11 @@ public class Address {
     private String asentamientoTipo;
     @Column(name = "numero_exterior")
     private String numeroExterior;
+    @Column(name = "postal_code")
+    private String postalCode;
+    @CreationTimestamp
+    @Column(name = "creation_date")
+    private Timestamp creationDate;
 
     public Long getId() {
         return id;
@@ -34,6 +44,14 @@ public class Address {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getCountry() {
@@ -90,5 +108,21 @@ public class Address {
 
     public void setNumeroExterior(String numeroExterior) {
         this.numeroExterior = numeroExterior;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public Timestamp getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Timestamp creationDate) {
+        this.creationDate = creationDate;
     }
 }

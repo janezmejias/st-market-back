@@ -5,6 +5,7 @@ import com.st.market.stmarket.address.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,13 +15,18 @@ public class AddressServiceHandler implements AddressService {
     AddressRepository repository;
 
     @Override
+    public List<Address> findByUserId(Long userId) {
+        return repository.findByUserId(userId);
+    }
+
+    @Override
     public Address save(Address model) throws Exception {
         return repository.save(model);
     }
 
     @Override
     public Optional<Address> findById(Long id) {
-        return Optional.empty();
+        return repository.findById(id);
     }
 
     @Override
