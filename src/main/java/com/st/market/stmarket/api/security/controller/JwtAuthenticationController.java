@@ -35,6 +35,7 @@ public class JwtAuthenticationController {
         try {
             User user = repository.findByEmail(model.getEmail());
             if (user == null) {
+                user = new User();
                 user.setLastSign(new Timestamp(System.currentTimeMillis()));
                 user = repository.save(model);
 

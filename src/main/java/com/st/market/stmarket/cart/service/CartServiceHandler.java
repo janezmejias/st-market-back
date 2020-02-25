@@ -10,7 +10,6 @@ import java.util.Optional;
 
 import com.st.market.stmarket.product.model.Product;
 import com.st.market.stmarket.product.repository.ProductRepository;
-import com.st.market.stmarket.user.model.User;
 import com.st.market.stmarket.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;

@@ -1,6 +1,5 @@
 package com.st.market.stmarket.product.model;
 
-import com.st.market.stmarket.order.model.Order;
 
 import java.math.BigDecimal;
 import javax.persistence.*;

@@ -30,12 +30,13 @@ public class ProductTest {
 
     @Autowired
     MockMvc mockMvc;
-    
+
     @Autowired
     ProductRepository repository;
 
     @Test
     public void proceed() throws Exception {
+        repository.deleteAll();
         for (int index = 1; index < 10; index++) {
             Product model = new Product();
             model.setTitle("title product " + index);
@@ -45,7 +46,7 @@ public class ProductTest {
             model.setNewPrice(new BigDecimal(index));
             model.setDiscount(30);
             model.setAvailable(index + 0L);
-            model.setDescription("vida sempiterna; Dios es, según el pensamiento de la época, fuente originaria y sempiterna de justicia");
+            model.setDescription("--description here--");
 
             Gson gson = new Gson();
             String o = gson.toJson(model);
@@ -53,14 +54,6 @@ public class ProductTest {
             mockMvc.perform(post(o))
                     .andExpect(status().isOk());
         }
-
-//        for (int index = 0; index < 100; index++) {
-//            mockMvc.perform(all())
-//                    .andExpect(status().isOk());                                    
-//        }
-//        
-//        repository.deleteAll();
-
     }
 
     private RequestBuilder post(String o) {
