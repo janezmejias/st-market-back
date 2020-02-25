@@ -40,64 +40,52 @@ public class MainMenuTest {
         model.setNeedToAuth(Boolean.FALSE);
         model.setAvailable(Boolean.TRUE);
 
+        save(model);
+
+        model = new MainMenu();
+        model.setName("Tienda");
+        model.setPath("/products");
+        model.setImage("http://icons.iconarchive.com/icons/icons8/windows-8/64/Business-Shop-icon.png");
+        model.setNeedToAuth(Boolean.FALSE);
+        model.setAvailable(Boolean.TRUE);
+
+        save(model);
+
+        model = new MainMenu();
+        model.setName("Carrito");
+        model.setPath("/cart");
+        model.setImage("http://icons.iconarchive.com/icons/icons8/windows-8/64/Ecommerce-Buy-icon.png");
+        model.setNeedToAuth(Boolean.TRUE);
+        model.setAvailable(Boolean.TRUE);
+
+        save(model);
+
+        model = new MainMenu();
+        model.setName("Direcciones");
+        model.setPath("/address");
+        model.setImage("http://icons.iconarchive.com/icons/icons8/windows-8/64/Cinema-Adventures-icon.png");
+        model.setNeedToAuth(Boolean.TRUE);
+        model.setAvailable(Boolean.TRUE);
+
+        save(model);
+
+        model = new MainMenu();
+        model.setName("Ordenes");
+        model.setPath("/orders");
+        model.setImage("http://icons.iconarchive.com/icons/icons8/windows-8/64/Ecommerce-Shopping-Bag-icon.png");
+        model.setNeedToAuth(Boolean.TRUE);
+        model.setAvailable(Boolean.TRUE);
+
+        save(model);
+
+    }
+
+    private void save(MainMenu model) throws Exception {
         Gson gson = new Gson();
         String o = gson.toJson(model);
 
         mockMvc.perform(post(o))
                 .andExpect(status().isOk());
-
-        model = new MainMenu();
-        model.setName("Tienda");
-        model.setPath("/products");
-        model.setImage("http://icons.iconarchive.com/icons/paomedia/small-n-flat/64/gift-icon.png");
-        model.setNeedToAuth(Boolean.FALSE);
-        model.setAvailable(Boolean.TRUE);
-
-        gson = new Gson();
-        o = gson.toJson(model);
-
-        mockMvc.perform(post(o))
-                .andExpect(status().isOk());
-
-        model = new MainMenu();
-        model.setName("Carrito");
-        model.setPath("/cart");
-        model.setImage("http://icons.iconarchive.com/icons/paomedia/small-n-flat/64/gift-icon.png");
-        model.setNeedToAuth(Boolean.TRUE);
-        model.setAvailable(Boolean.TRUE);
-
-        gson = new Gson();
-        o = gson.toJson(model);
-
-        mockMvc.perform(post(o))
-                .andExpect(status().isOk());
-
-        model = new MainMenu();
-        model.setName("Direcciones");
-        model.setPath("/address");
-        model.setImage("http://icons.iconarchive.com/icons/paomedia/small-n-flat/64/gift-icon.png");
-        model.setNeedToAuth(Boolean.TRUE);
-        model.setAvailable(Boolean.TRUE);
-
-        gson = new Gson();
-        o = gson.toJson(model);
-
-        mockMvc.perform(post(o))
-                .andExpect(status().isOk());
-
-        model = new MainMenu();
-        model.setName("Ordenes");
-        model.setPath("/orders");
-        model.setImage("http://icons.iconarchive.com/icons/paomedia/small-n-flat/64/gift-icon.png");
-        model.setNeedToAuth(Boolean.TRUE);
-        model.setAvailable(Boolean.TRUE);
-
-        gson = new Gson();
-        o = gson.toJson(model);
-
-        mockMvc.perform(post(o))
-                .andExpect(status().isOk());
-
     }
 
     private RequestBuilder post(String o) {

@@ -50,8 +50,8 @@ public class OrderController extends ControllerBase<Order> {
     @GetMapping(Constants.FIND_PRODUCTS_BY_ORDER_ID)
     @ResponseBody
     ResponseEntity<?> findProductsBy(@RequestParam("orderId") Long orderId) {
-        try {
-            List<ProductOrder> list = productService.findByOrderId(orderId);
+        try {            
+            List<ProductOrder> list = orderService.findByOrderId(orderId);
             return new ResponseEntity(list, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(e, HttpStatus.INTERNAL_SERVER_ERROR);

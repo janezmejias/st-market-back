@@ -11,6 +11,8 @@ public class ProductOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "product_id")
+    private Long productId;
     @Column(name = "title")
     private String title;
     @Column(name = "name")
@@ -37,6 +39,14 @@ public class ProductOrder {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     public String getTitle() {
@@ -110,4 +120,5 @@ public class ProductOrder {
     public void setOrder(Order order) {
         this.order = order;
     }
+
 }

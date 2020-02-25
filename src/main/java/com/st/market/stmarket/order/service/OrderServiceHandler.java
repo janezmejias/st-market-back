@@ -1,8 +1,7 @@
 package com.st.market.stmarket.order.service;
 
 import com.st.market.stmarket.cart.model.Cart;
-import com.st.market.stmarket.cart.repository.CartRepository;
-import com.st.market.stmarket.cart.repository.ProductCartRepository;
+import com.st.market.stmarket.cart.repository.CartRepository;import com.st.market.stmarket.cart.repository.ProductCartRepository;
 import com.st.market.stmarket.order.model.Order;
 import com.st.market.stmarket.order.repository.OrderRepository;
 import com.st.market.stmarket.product.model.Product;
@@ -37,6 +36,34 @@ public class OrderServiceHandler implements OrderService {
         return repository.findByUserId(userId);
     }
 
+    @Override
+    public List<ProductOrder> findByOrderId(Long orderId) {
+        List<ProductOrder> list = productOrderRepository.findByOrderId(orderId);
+        Map<Long, ProductOrder> map = new HashMap<>();
+        List<ProductOrder> response = new ArrayList<>();
+
+        for (ProductOrder model : list) {
+            if (map.containsKey(model.getProductId())) {
+                ProductOrder productOrder = model;
+                productOrder.setAvailable(model.getAvailable() + 1);
+                productOrder.setNewPrice(model.getNewPrice().add(model.getNewPrice()));
+                
+                System.out.println(model.getNewPrice().add(model.getNewPrice()));
+
+                map.put(model.getProductId(), productOrder);
+            } else {
+                model.setAvailable(1L);                
+                map.put(model.getProductId(), model);
+            }
+        }
+        for (Map.Entry<Long, ProductOrder> entry : map.entrySet()) {
+            ProductOrder value = entry.getValue();
+            response.add(value);
+        }
+
+        return response;
+    }
+
     @Transactional
     @Override
     public Order save(Order model) throws Exception {
@@ -49,7 +76,7 @@ public class OrderServiceHandler implements OrderService {
 
         Set<ProductOrder> productOrderSet = new HashSet<>();
 
-        for (Product item: products) {
+        for (Product item : products) {
             ProductOrder productOrder = new ProductOrder();
             productOrder.setId(item.getId());
             productOrder.setTitle(item.getTitle());
@@ -61,6 +88,7 @@ public class OrderServiceHandler implements OrderService {
             productOrder.setAvailable(item.getAvailable());
             productOrder.setDescription(item.getDescription());
             productOrder.setOrder(response);
+            productOrder.setProductId(item.getId());
 
             productOrderSet.add(productOrder);
         }

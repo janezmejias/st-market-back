@@ -3,8 +3,6 @@ package com.st.market.stmarket;
 import com.google.gson.Gson;
 import com.st.market.stmarket.address.model.Address;
 import com.st.market.stmarket.address.repository.AddressRepository;
-import com.st.market.stmarket.order.model.Order;
-import com.st.market.stmarket.order.repository.OrderRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -35,13 +32,13 @@ public class AddressTest {
     @Test
     public void proceed() throws Exception {
         Address model = new Address();
-        model.setAsentamiento("caiman");
-        model.setAsentamientoTipo("barrio");
-        model.setCountry("MEXICO");
+        model.setAsentamiento("Castilla, Caminos de San Gabriel");
+        model.setAsentamientoTipo("-");
+        model.setCountry("Mexico");
         model.setLocalidad("Keneddy");
         model.setMunicipio("Cundinamarca");
-        model.setNumeroExterior("1103");
-        model.setState("Bogota");
+        model.setNumeroExterior("Torre 1 Apto 1103");
+        model.setState("Bogota");        
 
         Gson gson = new Gson();
         String o = gson.toJson(model);
