@@ -37,7 +37,7 @@ public class ProductTest {
     @Test
     public void proceed() throws Exception {
         repository.deleteAll();
-        for (int index = 1; index < 10; index++) {
+        for (int index = 2; index < 10; index++) {
             Product model = new Product();
             model.setTitle("title product " + index);
             model.setName("product _ " + index);

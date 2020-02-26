@@ -1,13 +1,15 @@
 package com.st.market.stmarket.order.service;
 
 import com.st.market.stmarket.cart.model.Cart;
-import com.st.market.stmarket.cart.repository.CartRepository;import com.st.market.stmarket.cart.repository.ProductCartRepository;
+import com.st.market.stmarket.cart.repository.CartRepository;
+import com.st.market.stmarket.cart.repository.ProductCartRepository;
 import com.st.market.stmarket.order.model.Order;
 import com.st.market.stmarket.order.repository.OrderRepository;
 import com.st.market.stmarket.product.model.Product;
 import com.st.market.stmarket.product.model.ProductOrder;
 import com.st.market.stmarket.product.repository.ProductOrderRepository;
 import com.st.market.stmarket.product.repository.ProductRepository;
+import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,24 +44,20 @@ public class OrderServiceHandler implements OrderService {
         Map<Long, ProductOrder> map = new HashMap<>();
         List<ProductOrder> response = new ArrayList<>();
 
-        for (ProductOrder model : list) {
+        list.forEach((model) -> {
             if (map.containsKey(model.getProductId())) {
-                ProductOrder productOrder = model;
-                productOrder.setAvailable(model.getAvailable() + 1);
-                productOrder.setNewPrice(model.getNewPrice().add(model.getNewPrice()));
-                
-                System.out.println(model.getNewPrice().add(model.getNewPrice()));
+                ProductOrder productOrder = map.get(model.getProductId());
+                productOrder.setAvailable(productOrder.getAvailable() + 1);
 
                 map.put(model.getProductId(), productOrder);
             } else {
-                model.setAvailable(1L);                
+                model.setAvailable(1L);
                 map.put(model.getProductId(), model);
             }
-        }
-        for (Map.Entry<Long, ProductOrder> entry : map.entrySet()) {
-            ProductOrder value = entry.getValue();
+        });
+        map.entrySet().stream().map((entry) -> entry.getValue()).forEachOrdered((value) -> {
             response.add(value);
-        }
+        });
 
         return response;
     }
