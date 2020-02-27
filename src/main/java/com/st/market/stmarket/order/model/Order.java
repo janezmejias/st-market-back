@@ -26,6 +26,9 @@ public class Order {
     @Column(name = "address_id")
     private Long addressId;
 
+    @Column(name = "invoice_no")
+    private String invoiceNo;
+
     @CreationTimestamp
     @Column(name = "creation_date")
     private Timestamp creationDate;
@@ -58,6 +61,14 @@ public class Order {
         this.addressId = addressId;
     }
 
+    public String getInvoiceNo() {
+        return invoiceNo;
+    }
+
+    public void setInvoiceNo(String invoiceNo) {
+        this.invoiceNo = invoiceNo;
+    }
+
     public Timestamp getCreationDate() {
         return creationDate;
     }
@@ -73,4 +84,5 @@ public class Order {
     public void setProducts(Set<ProductOrder> products) {
         this.products = products;
     }
+
 }

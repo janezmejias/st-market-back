@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.st.market.stmarket.order.model.Order;
 import com.st.market.stmarket.order.repository.OrderRepository;
 import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @TestPropertySource(
         locations = "classpath:application.integration.properties")
+@Disabled
 public class OrderTest {
 
     @Autowired

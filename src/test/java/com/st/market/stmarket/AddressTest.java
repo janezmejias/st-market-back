@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.st.market.stmarket.address.model.Address;
 import com.st.market.stmarket.address.repository.AddressRepository;
 import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,6 +22,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 @AutoConfigureMockMvc
 @TestPropertySource(
         locations = "classpath:application.integration.properties")
+@Disabled
 public class AddressTest {
 
     @Autowired

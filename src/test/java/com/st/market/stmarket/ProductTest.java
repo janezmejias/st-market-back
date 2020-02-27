@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.st.market.stmarket.product.model.Product;
 import com.st.market.stmarket.product.repository.ProductRepository;
 import java.math.BigDecimal;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @TestPropertySource(
         locations = "classpath:application.integration.properties")
+@Disabled
 public class ProductTest {
 
     @Autowired

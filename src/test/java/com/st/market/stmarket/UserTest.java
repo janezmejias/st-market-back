@@ -3,6 +3,7 @@ package com.st.market.stmarket;
 import com.google.gson.Gson;
 import com.st.market.stmarket.user.model.User;
 import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -24,6 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @TestPropertySource(
         locations = "classpath:application.integration.properties")
+@Disabled
 public class UserTest {
 
     @Autowired

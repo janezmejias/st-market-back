@@ -1,39 +1,70 @@
 package com.st.market.stmarket;
 
-import com.google.gson.Gson;
+import com.st.market.stmarket.api.properties.model.Properties;
+import com.st.market.stmarket.api.properties.repository.PropertiesRepository;
 import com.st.market.stmarket.menu.model.MainMenu;
 import com.st.market.stmarket.menu.repository.MainMenuRepository;
-import org.junit.jupiter.api.Disabled;
+import com.st.market.stmarket.product.model.Product;
+import com.st.market.stmarket.product.repository.ProductRepository;
+import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @TestPropertySource(
         locations = "classpath:application.integration.properties")
-@Disabled
-public class MainMenuTest {
+public class InitialTest {
 
     @Autowired
-    MockMvc mockMvc;
-
+    PropertiesRepository repository;
     @Autowired
-    MainMenuRepository repository;
+    MainMenuRepository mainMenuRepository;
+    @Autowired
+    ProductRepository productRepository;
 
     @Test
     public void proceed() throws Exception {
         repository.deleteAll();
+        for (int index = 2; index < 10; index++) {
+            Product model = new Product();
+            model.setTitle("title product " + index);
+            model.setName("product _ " + index);
+            model.setImage("assets/img/product/c-product-" + index + ".jpg");
+            model.setOldPrice(new BigDecimal(index * 2));
+            model.setNewPrice(new BigDecimal(index));
+            model.setDiscount(30);
+            model.setAvailable(index + 0L);
+            model.setDescription("--description here--");
+
+            productRepository.save(model);
+        }
+    }
+
+    @Test
+    public void loadProperties() throws Exception {
+        Properties properties = new Properties();
+        repository.deleteAll();
+
+        properties.setName("SECRET_KEY");
+        properties.setValue("janezmejias");
+        repository.save(properties);
+
+        properties = new Properties();
+        properties.setName("EXPIRATION_TIME");
+        properties.setValue("10000");
+        repository.save(properties);
+    }
+
+    @Test
+    public void mainMenu() throws Exception {
+        mainMenuRepository.deleteAll();
 
         MainMenu model = new MainMenu();
         model.setName("Inicio");
@@ -42,7 +73,7 @@ public class MainMenuTest {
         model.setNeedToAuth(Boolean.FALSE);
         model.setAvailable(Boolean.TRUE);
 
-        save(model);
+        mainMenuRepository.save(model);
 
         model = new MainMenu();
         model.setName("Tienda");
@@ -51,7 +82,7 @@ public class MainMenuTest {
         model.setNeedToAuth(Boolean.FALSE);
         model.setAvailable(Boolean.TRUE);
 
-        save(model);
+        mainMenuRepository.save(model);
 
         model = new MainMenu();
         model.setName("Carrito");
@@ -60,7 +91,7 @@ public class MainMenuTest {
         model.setNeedToAuth(Boolean.TRUE);
         model.setAvailable(Boolean.TRUE);
 
-        save(model);
+        mainMenuRepository.save(model);
 
         model = new MainMenu();
         model.setName("Direcciones");
@@ -69,7 +100,7 @@ public class MainMenuTest {
         model.setNeedToAuth(Boolean.TRUE);
         model.setAvailable(Boolean.TRUE);
 
-        save(model);
+        mainMenuRepository.save(model);
 
         model = new MainMenu();
         model.setName("Ordenes");
@@ -78,22 +109,8 @@ public class MainMenuTest {
         model.setNeedToAuth(Boolean.TRUE);
         model.setAvailable(Boolean.TRUE);
 
-        save(model);
+        mainMenuRepository.save(model);
 
     }
 
-    private void save(MainMenu model) throws Exception {
-        Gson gson = new Gson();
-        String o = gson.toJson(model);
-
-        mockMvc.perform(post(o))
-                .andExpect(status().isOk());
-    }
-
-    private RequestBuilder post(String o) {
-        return MockMvcRequestBuilders
-                .post("/api/v1/options/create", o)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(o);
-    }
 }

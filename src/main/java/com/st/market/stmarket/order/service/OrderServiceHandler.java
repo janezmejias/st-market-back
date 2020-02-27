@@ -3,13 +3,13 @@ package com.st.market.stmarket.order.service;
 import com.st.market.stmarket.cart.model.Cart;
 import com.st.market.stmarket.cart.repository.CartRepository;
 import com.st.market.stmarket.cart.repository.ProductCartRepository;
+import com.st.market.stmarket.invoice.service.InvoiceService;
 import com.st.market.stmarket.order.model.Order;
 import com.st.market.stmarket.order.repository.OrderRepository;
 import com.st.market.stmarket.product.model.Product;
 import com.st.market.stmarket.product.model.ProductOrder;
 import com.st.market.stmarket.product.repository.ProductOrderRepository;
 import com.st.market.stmarket.product.repository.ProductRepository;
-import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +32,9 @@ public class OrderServiceHandler implements OrderService {
 
     @Autowired
     CartRepository cartRepository;
+
+    @Autowired
+    InvoiceService invoiceService;
 
     @Override
     public List<Order> findByUserId(Long userId) {
@@ -62,19 +65,24 @@ public class OrderServiceHandler implements OrderService {
         return response;
     }
 
+    private String generateInvoiceCode() {
+        return UUID.randomUUID().toString().toUpperCase().replaceAll("-", "");
+    }
+
     @Transactional
     @Override
     public Order save(Order model) throws Exception {
         List<Product> products = productRepository.findProductCartByToOrder(model.getUserId());
 
         if (products.isEmpty()) {
-            throw new Exception("No products available for this order.");
+            throw new Exception("No tiene productos en el carrito para generar esta orden.");
         }
+        model.setInvoiceNo(generateInvoiceCode());
         Order response = repository.save(model);
 
         Set<ProductOrder> productOrderSet = new HashSet<>();
 
-        for (Product item : products) {
+        products.stream().map((item) -> {
             ProductOrder productOrder = new ProductOrder();
             productOrder.setId(item.getId());
             productOrder.setTitle(item.getTitle());
@@ -87,9 +95,8 @@ public class OrderServiceHandler implements OrderService {
             productOrder.setDescription(item.getDescription());
             productOrder.setOrder(response);
             productOrder.setProductId(item.getId());
-
-            productOrderSet.add(productOrder);
-        }
+            return productOrder;
+        }).forEachOrdered((e) -> productOrderSet.add(e));
 
         model.setProducts(productOrderSet);
 
@@ -98,6 +105,8 @@ public class OrderServiceHandler implements OrderService {
             ProductOrder productOrder = iterator.next();
             productOrderRepository.save(productOrder);
         }
+
+        invoiceService.sendInvoice(model);
 
         Cart cart = cartRepository.findByUserId(model.getUserId());
         productCartRepository.deleteByCartId(cart.getId());
