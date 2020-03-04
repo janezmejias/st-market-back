@@ -16,6 +16,8 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "alias")
+    private String alias;
     @Column(name = "user_id", nullable = false)
     private Long userId;
     @Column(name = "country")
@@ -44,6 +46,14 @@ public class Address {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     public Long getUserId() {
@@ -125,4 +135,5 @@ public class Address {
     public void setCreationDate(Timestamp creationDate) {
         this.creationDate = creationDate;
     }
+
 }

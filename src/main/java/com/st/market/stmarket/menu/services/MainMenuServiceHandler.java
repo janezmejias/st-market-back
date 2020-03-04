@@ -5,8 +5,11 @@ import com.st.market.stmarket.menu.repository.MainMenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 
 @Service
+@CacheConfig(cacheNames={"mainMenu"})
 public class MainMenuServiceHandler implements MainMenuService {
 
     @Autowired
@@ -27,6 +30,7 @@ public class MainMenuServiceHandler implements MainMenuService {
         return mainMenuRepository.existsById(id);
     }
 
+    @Cacheable
     @Override
     public Iterable<MainMenu> findAll() {
         return mainMenuRepository.findAll();

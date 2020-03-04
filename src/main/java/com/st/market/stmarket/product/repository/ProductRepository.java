@@ -34,6 +34,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             " FROM product p " +
             " INNER JOIN product_cart pc on pc.product_id = p.id " +
             " INNER JOIN cart c ON c.id = pc.cart_id " +
-            " WHERE c.user_id = :userId", nativeQuery = true)
+            " WHERE c.user_id = :userId group by p.id", nativeQuery = true)
     Long countProductCartBy(@Param("userId") Long userId);
 }
